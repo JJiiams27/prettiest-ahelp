@@ -178,10 +178,6 @@
 
     <!-- Scripts for mobile menu and profile handling -->
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-btn').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
 
         // Populate profile info from localStorage if available
         document.addEventListener('DOMContentLoaded', () => {
@@ -269,26 +265,6 @@
     </script>
     <!-- Back to Top Button -->
     <button id="back-to-top" class="hidden fixed bottom-6 right-6 p-3 rounded-full bg-purple-500 text-white shadow-lg" aria-label="Back to top">↑</button>
-    <!-- Dark Mode Persistence & Back‑to‑Top Script -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        try {
-          if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
-          }
-        } catch (e) {}
-        const backBtn = document.getElementById('back-to-top');
-        window.addEventListener('scroll', function() {
-          if (window.scrollY > 200) {
-            backBtn.classList.remove('hidden');
-          } else {
-            backBtn.classList.add('hidden');
-          }
-        });
-        backBtn.addEventListener('click', function() {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      });
-    </script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

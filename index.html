@@ -44,15 +44,6 @@
         }
     </style>
 
-    <!-- Apply dark mode class early before page renders to prevent flash -->
-    <script>
-        try {
-            if (localStorage.getItem('darkMode') === 'true') {
-                document.documentElement.classList.add('dark-mode');
-                document.body.classList.add('dark-mode');
-            }
-        } catch (e) {}
-    </script>
 </head>
 <body class="text-gray-700 antialiased">
     <!-- Navigation Bar -->
@@ -219,12 +210,6 @@
 
     <!-- Scripts -->
     <script>
-        // Mobile navigation toggle
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
 
         // BMI Calculator removed; the new Health Assessment page provides personalised guidance instead.
 
@@ -256,27 +241,6 @@
     </script>
     <!-- Back to Top Button -->
     <button id="back-to-top" class="hidden fixed bottom-6 right-6 p-3 rounded-full bg-purple-500 text-white shadow-lg" aria-label="Back to top">↑</button>
-    <!-- Persistence & Back-to-Top Script -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // Apply saved dark mode from localStorage if enabled
-        try {
-          if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
-          }
-        } catch (e) {}
-        const backBtn = document.getElementById('back-to-top');
-        window.addEventListener('scroll', function() {
-          if (window.scrollY > 200) {
-            backBtn.classList.remove('hidden');
-          } else {
-            backBtn.classList.add('hidden');
-          }
-        });
-        backBtn.addEventListener('click', function() {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      });
-    </script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

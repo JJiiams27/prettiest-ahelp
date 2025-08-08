@@ -1588,20 +1588,6 @@
             if (userNameEl) {
                 userNameEl.textContent = userData.name;
             }
-            // Apply previously saved dark mode state
-            try {
-                const savedDark = localStorage.getItem('darkMode');
-                if (savedDark === 'true') {
-                    userData.darkMode = true;
-                    document.body.classList.add('dark-mode');
-                    const iconMoon = document.getElementById('icon-moon');
-                    const iconSun  = document.getElementById('icon-sun');
-                    if (iconMoon && iconSun) {
-                        iconMoon.classList.add('hidden');
-                        iconSun.classList.remove('hidden');
-                    }
-                }
-            } catch (e) {}
             // Immediately update the dashboard stats and visualisations when the page loads
             if (typeof updateDisplay === 'function') {
                 updateDisplay();
@@ -1713,30 +1699,6 @@
             });
         });
 
-        // Dark mode toggle
-        document.getElementById('dark-mode-toggle').addEventListener('click', () => {
-            // Flip the darkMode flag and apply/remove the dark mode class on the body
-            userData.darkMode = !userData.darkMode;
-            document.body.classList.toggle('dark-mode', userData.darkMode);
-            // Persist the dark mode preference so other pages stay in sync
-            try {
-                localStorage.setItem('darkMode', userData.darkMode);
-            } catch (e) {}
-
-            // Toggle visibility of the moon and sun icons; in light mode show the moon (meaning you can switch to dark)
-            const iconMoon = document.getElementById('icon-moon');
-            const iconSun  = document.getElementById('icon-sun');
-            if (userData.darkMode) {
-                iconMoon.classList.add('hidden');
-                iconSun.classList.remove('hidden');
-            } else {
-                iconMoon.classList.remove('hidden');
-                iconSun.classList.add('hidden');
-            }
-
-            // Show a toast letting the user know which mode is active
-            showEnhancedNotification(userData.darkMode ? 'Dark mode activated!' : 'Light mode activated!', 'info');
-        });
 
         // Voice command (demo)
         document.getElementById('voice-command').addEventListener('click', () => {
@@ -3112,19 +3074,6 @@
         // Initialise personalised plan display and yearly HRA reminders
         initHealthAssessmentFeatures();
 
-        // Back to top functionality
-        const backToTopBtn = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.remove('hidden');
-            } else {
-                backToTopBtn.classList.add('hidden');
-            }
-        });
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    </script>
 
     <!-- Footer -->
     <footer class="bg-white py-8">
@@ -3156,12 +3105,7 @@
         </div>
         <div class="mt-8 text-center text-gray-500">© 2025 Arkansas Shared Administrative Services. All rights reserved.</div>
     </footer>
+    <script src="assets/js/main.js"></script>
+</body>
 
-<!-- Script to handle mobile navigation toggle on the dashboard -->
-<script>
-    document.getElementById('mobile-menu-button').addEventListener('click', () => {
-        document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-</script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9685e464f31dbd17',t:'MTc1NDA1NzE0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

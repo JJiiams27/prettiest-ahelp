@@ -57,15 +57,6 @@
         }
     </style>
 
-    <!-- Apply dark mode class early before page renders to prevent flash of unstyled content -->
-    <script>
-      try {
-        if (localStorage.getItem('darkMode') === 'true') {
-          document.documentElement.classList.add('dark-mode');
-          document.body.classList.add('dark-mode');
-        }
-      } catch (e) {}
-    </script>
 </head>
 <body class="bg-gray-50">
     <!-- Navigation -->
@@ -203,35 +194,8 @@
         <div class="mt-8 text-center text-gray-500">© 2025 Arkansas Shared Administrative Services. All rights reserved.</div>
     </footer>
 
-    <!-- Mobile menu script -->
-    <script>
-        document.getElementById('mobile-btn').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-    </script>
     <!-- Back to Top Button -->
     <button id="back-to-top" class="hidden fixed bottom-6 right-6 p-3 rounded-full bg-purple-500 text-white shadow-lg" aria-label="Back to top">↑</button>
-    <!-- Dark Mode Persistence & Back‑to‑Top Script -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // Apply saved dark mode from localStorage if enabled
-        try {
-          if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
-          }
-        } catch (e) {}
-        const backBtn = document.getElementById('back-to-top');
-        window.addEventListener('scroll', function() {
-          if (window.scrollY > 200) {
-            backBtn.classList.remove('hidden');
-          } else {
-            backBtn.classList.add('hidden');
-          }
-        });
-        backBtn.addEventListener('click', function() {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      });
-    </script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

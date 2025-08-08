@@ -39,15 +39,6 @@
             border-color: #475569 !important;
         }
     </style>
-    <!-- Apply dark mode class early before page renders to prevent flash -->
-    <script>
-        try {
-            if (localStorage.getItem('darkMode') === 'true') {
-                document.documentElement.classList.add('dark-mode');
-                document.body.classList.add('dark-mode');
-            }
-        } catch (e) {}
-    </script>
 </head>
 <body class="bg-gray-50">
     <!-- Navigation -->
@@ -158,55 +149,24 @@
         <div class="mt-8 text-center text-gray-500">© 2025 Arkansas Shared Administrative Services. All rights reserved.</div>
     </footer>
 
-    <!-- Mobile menu script -->
-    <script>
-        document.getElementById('mobile-btn').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-    </script>
-    <!-- Back to Top Button -->
-    <button id="back-to-top" class="hidden fixed bottom-6 right-6 p-3 rounded-full bg-purple-500 text-white shadow-lg" aria-label="Back to top">↑</button>
-    <!-- Dark Mode Persistence & Back‑to‑Top Script -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        try {
-          if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
-          }
-        } catch (e) {}
-        const backBtn = document.getElementById('back-to-top');
-        window.addEventListener('scroll', function() {
-          if (window.scrollY > 200) {
-            backBtn.classList.remove('hidden');
-          } else {
-            backBtn.classList.add('hidden');
-          }
-        });
-        backBtn.addEventListener('click', function() {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      });
-    </script>
-      <!-- Scripts -->
-  <script>
-        document.getElementById('mobile-btn').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
+<!-- Back to Top Button -->
+<button id="back-to-top" class="hidden fixed bottom-6 right-6 p-3 rounded-full bg-purple-500 text-white shadow-lg" aria-label="Back to top">↑</button>
+<!-- Scripts -->
+<script>
+    document.getElementById('postForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const title = document.getElementById('postTitle').value.trim();
+        const description = document.getElementById('postDescription').value.trim();
+        const distance = document.getElementById('postDistance').value.trim();
+        const duration = document.getElementById('postDuration').value.trim();
+        const activityType = document.getElementById('postActivityType').value;
+        const imageFile = document.getElementById('postImage').files[0];
 
-        document.getElementById('postForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const title = document.getElementById('postTitle').value.trim();
-            const description = document.getElementById('postDescription').value.trim();
-            const distance = document.getElementById('postDistance').value.trim();
-            const duration = document.getElementById('postDuration').value.trim();
-            const activityType = document.getElementById('postActivityType').value;
-            const imageFile = document.getElementById('postImage').files[0];
-
-            const reader = new FileReader();
-            reader.onload = function () {
-                const post = document.createElement('div');
-                post.className = 'bg-white p-6 rounded-lg shadow dark-mode:bg-gray-700';
-                post.innerHTML = `
+        const reader = new FileReader();
+        reader.onload = function () {
+            const post = document.createElement('div');
+            post.className = 'bg-white p-6 rounded-lg shadow dark-mode:bg-gray-700';
+            post.innerHTML = `
                     <h3 class="font-semibold text-lg text-gray-800 dark-mode:text-white">You</h3>
                     <p class="text-gray-600 dark-mode:text-gray-300 mt-2">${description}</p>
                     ${activityType ? `<p class="text-sm text-purple-500 mt-1">Activity: ${activityType}</p>` : ''}
@@ -215,35 +175,16 @@
                     ${reader.result ? `<img src="${reader.result}" alt="Uploaded image" class="mt-4 rounded">` : ''}
                     <span class="text-xs text-gray-400 block mt-2">Just now</span>
                 `;
-                document.getElementById('postFeed').prepend(post);
-                document.getElementById('postForm').reset();
-            };
-            if (imageFile) {
-                reader.readAsDataURL(imageFile);
-            } else {
-                reader.onload();
-            }
-        });
-
-        // Dark mode and back to top
-        document.addEventListener('DOMContentLoaded', function () {
-            try {
-                if (localStorage.getItem('darkMode') === 'true') {
-                    document.body.classList.add('dark-mode');
-                }
-            } catch (e) {}
-            const backBtn = document.getElementById('back-to-top');
-            window.addEventListener('scroll', function () {
-                if (window.scrollY > 200) {
-                    backBtn.classList.remove('hidden');
-                } else {
-                    backBtn.classList.add('hidden');
-                }
-            });
-            backBtn.addEventListener('click', function () {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        });
-    </script>
+            document.getElementById('postFeed').prepend(post);
+            document.getElementById('postForm').reset();
+        };
+        if (imageFile) {
+            reader.readAsDataURL(imageFile);
+        } else {
+            reader.onload();
+        }
+    });
+</script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
