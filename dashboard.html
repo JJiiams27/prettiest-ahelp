@@ -243,6 +243,14 @@
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
     </style>
+    <script>
+        try {
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.documentElement.classList.add('dark-mode');
+                document.body.classList.add('dark-mode');
+            }
+        } catch (e) {}
+    </script>
 </head>
 <body class="bg-purple-100 transition-all duration-500">
     <!-- Particle Background -->
@@ -1525,7 +1533,6 @@
             activities: [],
             achievements: [],
             mood: 'good',
-            darkMode: false,
             level: 1,
             // Accumulated leave hours redeemed via the rewards programme
             leaveTime: 0
@@ -1588,20 +1595,6 @@
             if (userNameEl) {
                 userNameEl.textContent = userData.name;
             }
-            // Apply previously saved dark mode state
-            try {
-                const savedDark = localStorage.getItem('darkMode');
-                if (savedDark === 'true') {
-                    userData.darkMode = true;
-                    document.body.classList.add('dark-mode');
-                    const iconMoon = document.getElementById('icon-moon');
-                    const iconSun  = document.getElementById('icon-sun');
-                    if (iconMoon && iconSun) {
-                        iconMoon.classList.add('hidden');
-                        iconSun.classList.remove('hidden');
-                    }
-                }
-            } catch (e) {}
             // Immediately update the dashboard stats and visualisations when the page loads
             if (typeof updateDisplay === 'function') {
                 updateDisplay();
@@ -1713,30 +1706,7 @@
             });
         });
 
-        // Dark mode toggle
-        document.getElementById('dark-mode-toggle').addEventListener('click', () => {
-            // Flip the darkMode flag and apply/remove the dark mode class on the body
-            userData.darkMode = !userData.darkMode;
-            document.body.classList.toggle('dark-mode', userData.darkMode);
-            // Persist the dark mode preference so other pages stay in sync
-            try {
-                localStorage.setItem('darkMode', userData.darkMode);
-            } catch (e) {}
-
-            // Toggle visibility of the moon and sun icons; in light mode show the moon (meaning you can switch to dark)
-            const iconMoon = document.getElementById('icon-moon');
-            const iconSun  = document.getElementById('icon-sun');
-            if (userData.darkMode) {
-                iconMoon.classList.add('hidden');
-                iconSun.classList.remove('hidden');
-            } else {
-                iconMoon.classList.remove('hidden');
-                iconSun.classList.add('hidden');
-            }
-
-            // Show a toast letting the user know which mode is active
-            showEnhancedNotification(userData.darkMode ? 'Dark mode activated!' : 'Light mode activated!', 'info');
-        });
+        // Dark mode handled by shared script
 
         // Voice command (demo)
         document.getElementById('voice-command').addEventListener('click', () => {
@@ -3052,14 +3022,14 @@
             const darkThumb = document.getElementById('settings-dark-thumb');
             if (darkToggle) {
                 // Initialize toggle position based on current dark mode state
-                if (userData.darkMode) {
+                if (document.documentElement.classList.contains('dark-mode')) {
                     darkToggle.classList.add('bg-purple-600');
                     darkThumb.classList.add('translate-x-6');
                 }
                 darkToggle.addEventListener('click', () => {
                     // Trigger the existing dark mode toggle and update thumb appearance
                     document.getElementById('dark-mode-toggle').click();
-                    if (userData.darkMode) {
+                    if (document.documentElement.classList.contains('dark-mode')) {
                         darkToggle.classList.add('bg-purple-600');
                         darkThumb.classList.add('translate-x-6');
                     } else {
@@ -3157,6 +3127,7 @@
         <div class="mt-8 text-center text-gray-500">© 2025 Arkansas Shared Administrative Services. All rights reserved.</div>
     </footer>
 
+<script src="dark-mode.js"></script>
 <!-- Script to handle mobile navigation toggle on the dashboard -->
 <script>
     document.getElementById('mobile-menu-button').addEventListener('click', () => {
