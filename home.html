@@ -6,6 +6,8 @@
   <title>AHELP – Home</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- AOS (Animate On Scroll) library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <style>
     body { font-family: 'Inter', sans-serif; }
     .dark-mode {
@@ -98,15 +100,15 @@
 
   <!-- Features Section -->
   <section class="py-12 px-6 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div class="bg-white dark-mode:bg-gray-800 rounded-xl shadow-md p-6 text-center">
+    <div class="bg-white dark-mode:bg-gray-800 rounded-xl shadow-md p-6 text-center" data-aos="fade-up">
       <h2 class="text-xl font-bold mb-2">Track Your Progress</h2>
       <p class="text-gray-600 dark-mode:text-gray-300">Log water, steps, cardio, and more. Set goals and see real-time health data.</p>
     </div>
-    <div class="bg-white dark-mode:bg-gray-800 rounded-xl shadow-md p-6 text-center">
+    <div class="bg-white dark-mode:bg-gray-800 rounded-xl shadow-md p-6 text-center" data-aos="fade-up">
       <h2 class="text-xl font-bold mb-2">Complete Challenges</h2>
       <p class="text-gray-600 dark-mode:text-gray-300">Join wellness challenges and earn points toward paid leave.</p>
     </div>
-    <div class="bg-white dark-mode:bg-gray-800 rounded-xl shadow-md p-6 text-center">
+    <div class="bg-white dark-mode:bg-gray-800 rounded-xl shadow-md p-6 text-center" data-aos="fade-up">
       <h2 class="text-xl font-bold mb-2">Personalized Goals</h2>
       <p class="text-gray-600 dark-mode:text-gray-300">Your Health Risk Assessment tailors the experience to your needs.</p>
     </div>
@@ -116,5 +118,10 @@
   <footer class="text-center py-8 text-sm text-gray-500 dark-mode:text-gray-400">
     &copy; 2025 AHELP – Arkansas Healthy Employee Lifestyle Program
   </footer>
+  <!-- AOS Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
 </html>
